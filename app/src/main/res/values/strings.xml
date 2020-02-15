@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">CubosApp-Movies</string>
+    <string name="nav_header_title">CubosApp-Movies</string>
+    <string name="nav_header_subtitle">Seu App de filmes</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="menu_watched">Watched Movies</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_movie">Movies</string>
+    <string name="menu_about">About</string>
+    <string name="desc_app">Aplicativo de filmes.</string>
+    <string name="tab_action">Ação</string>
+    <string name="tab_fantasy">Fantasia</string>
+    <string name="tab_fiction">Ficção</string>
+    <string name="tab_drama">Drama</string>
+    <string name="movie_image">Imagem do Filme</string>
+    <string name="movie_title">Título do filme</string>
+    <string name="title">Nome:</string>
+    <string name="poster_path">Url:</string>
+    <string name="overview">Resumo:</string>
+    <string name="scrolling">Mais informações</string>
+    <string name="didYouLikeIt">Deixe seus comentários:</string>
+    <string name="description">Descrição:</string>
+    <string name="save">Save</string>
+    <string name="help">DICAS DE COMO UTILIZAR ESSE APP</string>
+    <string name="about">Aplicativo desenvolvido para desafio na Cubos tecnologia por Marlena Martins em 18/02/2020</string>
+    <string name="hello">Olá, seja bem vindo!!</string>
+    <string name="instructions">
+        Para aproveitar bem o conteúdo desse aplicativo, sugerimos que:
+        1) Abra as listas de filmes, observe as opções.
+        2) Escolha um filme, clique!! Agora saiba um pouco sobre ele. Aproveite!!</string>
+    <string name="options">Options</string>
+    <string name="erro0">Erro desconhecido</string>
+    <string name="erro1">Erro na solicitação, escolha algum favorito antes.</string>
+    <string name="erro2">Erro na busca do gênero</string>
+</resources>
