@@ -1,6 +1,7 @@
 package com.marlena.cubosapp_movies.scenes.moviesList
 
 import android.content.Context
+import com.marlena.cubosapp_movies.model.domain.Genre
 import com.marlena.cubosapp_movies.model.domain.Movie
 import com.marlena.cubosapp_movies.model.response.GenreResponse
 
@@ -10,7 +11,7 @@ interface MoviesList {
         fun makeRequests()
         fun setList(list: List<Movie>)
         fun setMovieListByGenre(list: List<Movie>)
-        fun setGenreList(genreResponse: GenreResponse?)
+        fun setGenreList(genreList: List<Genre>?)
         fun getViewContext(): Context?
     }
 
@@ -18,7 +19,7 @@ interface MoviesList {
         fun getMovieListByGenre(
             genrePage: String,
             movieList: List<Movie>,
-            genreResponse: GenreResponse?
+            genreList: List<Genre>?
         )
 
         fun getMovieList()

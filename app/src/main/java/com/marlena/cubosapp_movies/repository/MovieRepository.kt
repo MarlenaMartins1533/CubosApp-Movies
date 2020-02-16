@@ -1,17 +1,34 @@
 package com.marlena.cubosapp_movies.repository
 
+import com.marlena.cubosapp_movies.model.domain.Genre
 import com.marlena.cubosapp_movies.model.domain.Movie
 import com.marlena.cubosapp_movies.model.response.GenreResponse
 import com.marlena.cubosapp_movies.service.MovieClient
 
 class MovieRepository {
 
+    val movies = mutableListOf<Movie>()
+    val genres = mutableListOf<Genre>()
+
     fun getMovieList(): List<Movie>? {
-        val response = MovieClient.instance.callGetMovies()
-        return response?.results
+        if (movies.isNullOrEmpty()) {
+            val response = MovieClient.instance.callGetMovies()
+            response?.results?.let {
+                movies.clear()
+                movies.addAll(it)
+            }
+        }
+        return movies
     }
 
-    fun getGenreList(): GenreResponse? {
-        return MovieClient.instance.callGetGenres()
+    fun getGenreList(): List<Genre>? {
+        if (genres.isNullOrEmpty()){
+            val response = MovieClient.instance.callGetGenres()
+            response?.genres?.let {
+                genres.clear()
+                genres.addAll(it)
+            }
+        }
+        return genres
     }
 }

@@ -11,8 +11,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.marlena.cubosapp_movies.R
+import com.marlena.cubosapp_movies.model.domain.Genre
 import com.marlena.cubosapp_movies.model.domain.Movie
-import com.marlena.cubosapp_movies.model.response.GenreResponse
 import com.marlena.cubosapp_movies.scenes.adapter.MovieAdapter
 import com.marlena.cubosapp_movies.scenes.theMovie.TheMovieActivity
 import kotlinx.android.synthetic.main.fragment_movie_list.*
@@ -45,7 +45,6 @@ class MoviesListFragment : Fragment(), MoviesList.View, MovieAdapter.Listener {
 
     override fun makeRequests() {
         presenter.getMovieList()
-        presenter.getGenreList()
     }
 
     private fun setupAdapters() {
@@ -63,15 +62,18 @@ class MoviesListFragment : Fragment(), MoviesList.View, MovieAdapter.Listener {
     override fun setList(list: List<Movie>) {
         movieList.clear()
         movieList.addAll(list)
+        presenter.getGenreList()
     }
 
-    override fun setGenreList(genreResponse: GenreResponse?) {
-        presenter.getMovieListByGenre(genrePage, movieList, genreResponse)
+    override fun setGenreList(genreList: List<Genre>?) {
+        presenter.getMovieListByGenre(genrePage, movieList, genreList)
     }
 
     override fun setMovieListByGenre(list: List<Movie>) {
         movieListByGenre.clear()
         movieListByGenre.addAll(list)
+        adapter?.notifyDataSetChanged()
+
     }
 
     override fun displayFailure(error: Int) {
@@ -109,7 +111,6 @@ class MoviesListFragment : Fragment(), MoviesList.View, MovieAdapter.Listener {
             arguments = Bundle().apply {
                 putString(GENRE_PAGE, genrePage)
             }
-            return MoviesListFragment()
         }
     }
 }
