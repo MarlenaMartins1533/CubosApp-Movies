@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">CubosApp-Movies</string>
+    <string name="app_label">CubosApp-Movies</string>
     <string name="nav_header_title">CubosApp-Movies</string>
     <string name="nav_header_subtitle">Seu App de filmes</string>
     <string name="nav_header_desc">Navigation header</string>
+    <string name="search_hint">Pesquisar filme</string>
     <string name="menu_watched">Watched Movies</string>
     <string name="menu_home">Home</string>
     <string name="menu_movie">Movies</string>
@@ -30,6 +32,6 @@
         2) Escolha um filme, clique!! Agora saiba um pouco sobre ele. Aproveite!!</string>
     <string name="options">Options</string>
     <string name="erro0">Erro desconhecido</string>
-    <string name="erro1">Erro na solicitação, escolha algum favorito antes.</string>
+    <string name="erro1">Erro na solicitação, não foi possível pegar a lista de movies.</string>
     <string name="erro2">Erro na busca do gênero</string>
 </resources>

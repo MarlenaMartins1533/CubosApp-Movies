@@ -28,7 +28,7 @@ class MovieFragment : Fragment(), Movie.View {
     ): View? {
         presenter = MoviePresenter(this)
 //        presenter.getGenres()
-//        listener()
+//        setView()
         return inflater.inflate(R.layout.fragment_page_genre, container, false)
     }
 
@@ -37,14 +37,9 @@ class MovieFragment : Fragment(), Movie.View {
         setupPageAdapter()
     }
 
-//    private fun listener() {
-//
-//        search.setOnClickListener {
-//
-//        }
-//
+//    private fun setView() {
+//        search.visibility = View.VISIBLE
 //    }
-
 
     private fun setupPageAdapter() {
         sectionsPagerAdapter = SectionsPagerAdapter(childFragmentManager, this)
