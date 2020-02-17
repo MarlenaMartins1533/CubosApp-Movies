@@ -5,13 +5,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat.setTransitionName
 import com.marlena.cubosapp_movies.R
+import com.marlena.cubosapp_movies.data.Constants.imageUrlMovie
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_themovie.*
 
 class TheMovieActivity : AppCompatActivity(), TheMovie.View {
-
     private lateinit var presenter: TheMoviePresenter
-    lateinit var description: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,18 +18,22 @@ class TheMovieActivity : AppCompatActivity(), TheMovie.View {
 
         presenter = TheMoviePresenter(this)
 
-        val poster_path = intent.getStringExtra("imagePosterPath") ?: ""
-        val backdrop_path = intent.getStringExtra("imageBackdropPath") ?: ""
-        val title = intent.getStringExtra("imageTitle") ?: ""
-        val overview = intent.getStringExtra("imageOverview") ?: ""
+        val posterPath = intent.getStringExtra("imagePosterPath") ?: ""
+        val movieTitle = intent.getStringExtra("imageTitle") ?: ""
+        val movieOverview = intent.getStringExtra("imageOverview") ?: ""
 
         setTransitionName(movieIMG, TRANSITION_IMAGE)
 
-        if (poster_path.isEmpty()) {
+        if (posterPath.isEmpty())
             movieIMG.setImageResource(R.drawable.alerta_790x400)
-        } else {
-            if (backdrop_path.isEmpty()) setImageMovie(poster_path)
-            setImageMovie(backdrop_path)
+        else setImageMovie(imageUrlMovie + posterPath)
+
+        titleTXT.text = movieTitle
+        if (movieOverview.isNotEmpty()) overviewTXT.text = movieOverview
+        else {
+            val message = "Não há descrição!"
+            overviewTXT.text = message
+            showMessage(message)
         }
     }
 

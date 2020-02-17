@@ -18,14 +18,6 @@ class MoviePresenter(private val view: Movie.View) : Movie.Presenter, CoroutineS
         }
     }
 
-//    override fun getGenres() {
-//        job = launch {
-//            val response = withContext(Dispatchers.IO) { MovieClient.instance.getGenres() }
-//            view.setGenresList(response)
-//            Log.d("LENA", response?.genres?.get(0)?.name)
-//        }
-//    }
-
     override fun kill() {
         job?.cancel()
     }

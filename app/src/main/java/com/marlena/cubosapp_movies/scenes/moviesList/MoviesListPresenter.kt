@@ -3,7 +3,6 @@ package com.marlena.cubosapp_movies.scenes.moviesList
 import com.marlena.cubosapp_movies.core.App
 import com.marlena.cubosapp_movies.model.domain.Genre
 import com.marlena.cubosapp_movies.model.domain.Movie
-import com.marlena.cubosapp_movies.model.response.GenreResponse
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 

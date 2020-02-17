@@ -18,12 +18,30 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <SearchView
-                android:id="@+id/search"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:visibility="gone"/>
+                android:layout_gravity="end">
+
+                <EditText
+                    android:id="@+id/searchEDT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/search_hint"
+                    android:inputType="textAutoComplete"
+                    android:visibility="gone"
+                    tools:ignore="LabelFor"
+                    android:importantForAutofill="no" />
+
+                <ImageButton
+                    android:id="@+id/searchBTN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ic_search_black_24dp"
+                    android:background="@color/colorBackground"
+                    android:contentDescription="@string/search_hint" />
+            </LinearLayout>
 
         </androidx.appcompat.widget.Toolbar>
 
