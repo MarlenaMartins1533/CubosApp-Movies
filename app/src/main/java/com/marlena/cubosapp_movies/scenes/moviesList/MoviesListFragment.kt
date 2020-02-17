@@ -43,7 +43,7 @@ class MoviesListFragment : Fragment(), MoviesList.View, MovieAdapter.Listener {
         setupViews()
     }
 
-    override fun makeRequests() {
+    private fun makeRequests() {
         presenter.getMovieList()
     }
 
@@ -80,6 +80,7 @@ class MoviesListFragment : Fragment(), MoviesList.View, MovieAdapter.Listener {
         when (error) {
             1 -> Toast.makeText(context, getString(R.string.erro1), Toast.LENGTH_LONG).show()
             2 -> Toast.makeText(context, getString(R.string.erro2), Toast.LENGTH_LONG).show()
+            3 -> Toast.makeText(context, getString(R.string.erro3), Toast.LENGTH_LONG).show()
             else -> Toast.makeText(context, getString(R.string.erro0), Toast.LENGTH_LONG).show()
         }
     }
@@ -97,9 +98,8 @@ class MoviesListFragment : Fragment(), MoviesList.View, MovieAdapter.Listener {
 
         val intent = Intent(context, TheMovieActivity::class.java).apply {
             putExtra("imageTitle", movie.title)
+            putExtra("imageOverview", (movie.overview))
             putExtra("imagePosterPath", (movie.poster_path))
-            putExtra("imageBackdropPath", (movie.backdrop_path))
-            putExtra("imageOverview", "")
         }
         activity?.startActivity(intent, options.toBundle())
         adapter?.notifyDataSetChanged()

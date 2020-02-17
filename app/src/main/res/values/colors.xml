@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorBackground">#FFFFFF</color>
+    <color name="colorMovieBackground">#DDDBDB</color>
     <color name="colorText">#000000</color>
     <color name="colorBlack">#000000</color>
     <color name="colorPrimaryDark">#722AEE</color>

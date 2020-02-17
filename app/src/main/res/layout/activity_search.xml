@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".scenes.main.MainActivity">
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarSearch"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            app:popupTheme="@style/AppTheme.NoActionBar">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -26,28 +22,31 @@
 
                 <EditText
                     android:id="@+id/searchEDT"
-                    android:layout_width="match_parent"
+                    android:layout_width="225dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/search_hint"
+                    android:importantForAutofill="no"
                     android:inputType="textAutoComplete"
-                    android:visibility="gone"
-                    tools:ignore="LabelFor"
-                    android:importantForAutofill="no" />
+                    tools:ignore="LabelFor" />
 
                 <ImageButton
                     android:id="@+id/searchBTN"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginEnd="8dp"
-                    android:src="@drawable/ic_search_black_24dp"
                     android:background="@color/colorBackground"
-                    android:contentDescription="@string/search_hint" />
+                    android:contentDescription="@string/search_hint"
+                    android:src="@drawable/ic_search_black_24dp" />
+
             </LinearLayout>
 
         </androidx.appcompat.widget.Toolbar>
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <include layout="@layout/content_main" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewRV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="3"
+        tools:listitem="@layout/item_movie" />
+</LinearLayout>

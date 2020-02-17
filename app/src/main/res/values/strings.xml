@@ -21,7 +21,7 @@
     <string name="overview">Resumo:</string>
     <string name="scrolling">Mais informações</string>
     <string name="didYouLikeIt">Deixe seus comentários:</string>
-    <string name="description">Descrição:</string>
+    <string name="description">Descrição</string>
     <string name="save">Save</string>
     <string name="help">DICAS DE COMO UTILIZAR ESSE APP</string>
     <string name="about">Aplicativo desenvolvido para desafio na Cubos tecnologia por Marlena Martins em 18/02/2020</string>
@@ -34,4 +34,5 @@
     <string name="erro0">Erro desconhecido</string>
     <string name="erro1">Erro na solicitação, não foi possível pegar a lista de movies.</string>
     <string name="erro2">Erro na busca do gênero</string>
+    <string name="erro3">Nenhum filme encontrado</string>
 </resources>
