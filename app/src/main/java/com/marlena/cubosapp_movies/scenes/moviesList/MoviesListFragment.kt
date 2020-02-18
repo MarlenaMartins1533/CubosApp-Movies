@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.marlena.cubosapp_movies.PaginationView
 import com.marlena.cubosapp_movies.R
 import com.marlena.cubosapp_movies.model.domain.Genre
 import com.marlena.cubosapp_movies.model.domain.Movie
@@ -22,6 +23,8 @@ class MoviesListFragment : Fragment(), MoviesList.View, MovieAdapter.Listener {
     private val movieList = mutableListOf<Movie>()
     private val movieListByGenre = mutableListOf<Movie>()
     private lateinit var presenter: MoviesListPresenter
+    private lateinit var paginationView: PaginationView
+    private var searching = false
     private var genrePage: String = " "
     private var adapter: MovieAdapter? = null
 
@@ -38,13 +41,10 @@ class MoviesListFragment : Fragment(), MoviesList.View, MovieAdapter.Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        makeRequests()
+        paginationStart()
+        paginationView.makeRequests()
         setupAdapters()
         setupViews()
-    }
-
-    private fun makeRequests() {
-        presenter.getMovieList()
     }
 
     private fun setupAdapters() {
@@ -57,6 +57,25 @@ class MoviesListFragment : Fragment(), MoviesList.View, MovieAdapter.Listener {
 
     private fun setupViews() {
         recyclerViewRV?.adapter = adapter
+    }
+
+    private fun paginationStart() {
+        paginationView = object : PaginationView() {
+
+            override fun showProgressBar() {
+                progressBar?.visibility = View.VISIBLE
+            }
+
+            override fun hideProgressBar() {
+                progressBar?.visibility = View.GONE
+            }
+
+            override fun makeRequests() {
+                showProgressBar()
+                presenter.getMovieList()
+                hideProgressBar()
+            }
+        }
     }
 
     override fun setList(list: List<Movie>) {
@@ -112,5 +131,11 @@ class MoviesListFragment : Fragment(), MoviesList.View, MovieAdapter.Listener {
                 putString(GENRE_PAGE, genrePage)
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        searching = false
+        paginationView.theEndPagination()
     }
 }
