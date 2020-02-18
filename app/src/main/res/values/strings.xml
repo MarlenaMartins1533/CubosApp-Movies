@@ -35,4 +35,6 @@
     <string name="erro1">Erro na solicitação, não foi possível pegar a lista de movies.</string>
     <string name="erro2">Erro na busca do gênero</string>
     <string name="erro3">Nenhum filme encontrado</string>
+    <string name="erro4">Filmes não foram carregados,verifique sua conexão.</string>
+    <string name="erro5">Não foi encontrado filmes com esse título.</string>
 </resources>

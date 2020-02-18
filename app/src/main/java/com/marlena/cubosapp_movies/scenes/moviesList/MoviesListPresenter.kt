@@ -38,7 +38,6 @@ class MoviesListPresenter(private val view: MoviesList.View) : MoviesList.Presen
             val result = withContext(Dispatchers.IO) {
                 App.movieRepository.getMovieList()
             }
-
             if (result.isNullOrEmpty())
                 view.displayFailure(1)
             else

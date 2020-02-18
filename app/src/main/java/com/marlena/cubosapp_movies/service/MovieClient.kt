@@ -4,6 +4,7 @@ import android.util.Log
 import com.marlena.cubosapp_movies.data.Constants
 import com.marlena.cubosapp_movies.model.response.GenreResponse
 import com.marlena.cubosapp_movies.model.response.MovieResponse
+import com.marlena.cubosapp_movies.model.response.SearchResponse
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
@@ -23,9 +24,9 @@ class MovieClient {
                 Log.d("LENA", "getMovies Response Error: ${response.errorBody()?.toString()}")
             }
         } catch (e: IOException) {
-            Log.e("IOException", e.message)
+            if(e.message != null) Log.e("IOException", e.message)
         } catch (e: RuntimeException) {
-            Log.e("Runtime Exception", e.message)
+            if(e.message != null) Log.e("Runtime Exception", e.message)
         }
         return null
     }
@@ -42,9 +43,27 @@ class MovieClient {
                 Log.d("LENA", "getGenres Response Error: ${response.errorBody()?.toString()}")
             }
         } catch (e: IOException) {
-            Log.e("LENA", e.message)
+            if(e.message != null)  Log.e("LENA", e.message)
         } catch (e: RuntimeException) {
-            Log.e("LENA", e.message)
+            if(e.message != null)  Log.e("LENA", e.message)
+        }
+        return null
+    }
+
+    fun callGetResultSearch(querySearch: String): SearchResponse? {
+        val call = movieApi.getResultSearch(query = querySearch)
+        try {
+            val response = call.execute()
+            if (response.isSuccessful) {
+                Log.d("LENA", "getResultSearch successful: ${response.body()?.toString()}")
+                return response.body()
+            } else {
+                Log.d("LENA", "getResultSearch Response Error: ${response.errorBody()?.toString()}")
+            }
+        } catch (e: IOException) {
+            if(e.message != null)  Log.e("IOException", e.message)
+        } catch (e: RuntimeException) {
+            if(e.message != null)  Log.e("Runtime Exception", e.message)
         }
         return null
     }
