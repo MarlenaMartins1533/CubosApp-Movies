@@ -30,4 +30,9 @@ class MovieRepository {
         }
         return genres
     }
+
+    fun getResultSearchList(querySearch: String): List<Movie>? {
+        val response = MovieClient.instance.callGetResultSearch(querySearch)
+        return response?.results
+    }
 }

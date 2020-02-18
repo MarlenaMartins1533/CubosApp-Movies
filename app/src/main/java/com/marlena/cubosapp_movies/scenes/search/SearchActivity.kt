@@ -9,22 +9,15 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.marlena.cubosapp_movies.R
-import com.marlena.cubosapp_movies.core.App
 import com.marlena.cubosapp_movies.model.domain.Movie
 import com.marlena.cubosapp_movies.scenes.adapter.MovieAdapter
 import com.marlena.cubosapp_movies.scenes.theMovie.TheMovieActivity
 import kotlinx.android.synthetic.main.activity_search.*
-import kotlinx.android.synthetic.main.activity_search.searchBTN
-import kotlinx.android.synthetic.main.activity_search.searchEDT
-import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.fragment_movie_list.recyclerViewRV
 
 class SearchActivity : AppCompatActivity(), Search.View, MovieAdapter.Listener {
-    private var searchText: String? = " "
-    private lateinit var movieList: List<Movie>
-    private val resultList = mutableListOf<Movie>()
+    private val searchList = mutableListOf<Movie>()
+    private lateinit var presenter: SearchPresenter
     private var adapter: MovieAdapter? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,57 +25,43 @@ class SearchActivity : AppCompatActivity(), Search.View, MovieAdapter.Listener {
 
         setSupportActionBar(toolbarSearch)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        presenter = SearchPresenter(this)
 
-//        searchText = intent.getStringExtra(SEARCH_ARG) ?: " "
-//         = searchText
-        initListener()
-        getMoviesList()
-        onSearchSubmit()
-    }
-
-    private fun onSearchSubmit() {
-        val text = searchEDT.text.toString()
-        searchText = text
-        resultList.clear()
-
-        if (searchText.isNullOrEmpty()) setupAdapters(movieList)
-        else {
-            movieList.forEach {
-                if (it.title.contains(text, ignoreCase = false)) resultList.add(it)
-            }
-            if (resultList.isNullOrEmpty()) setupAdapters(movieList)
-            else setupAdapters(resultList)
-        }
+        setupAdapters()
         setupViews()
     }
 
-    private fun initListener() {
-        searchBTN.setOnClickListener {
-            onSearchSubmit()
-        }
-    }
-    private fun getMoviesList() {
-        val list = App.movieRepository.getMovieList()
-
-        if (list.isNullOrEmpty())
-            showMessage("Filmes não foram carregados,verifique sua conexão.")
-        else movieList = list
+    override fun setSearchList(result: List<Movie>) {
+        searchList.clear()
+        searchList.addAll(result)
+        adapter?.notifyDataSetChanged()
     }
 
-    private fun setupAdapters(list: List<Movie>) {
-        adapter =
-            MovieAdapter(
-                list,
-                this
-            )
+    private fun setupAdapters() {
+        adapter = MovieAdapter(searchList, this)
+        adapter?.notifyDataSetChanged()
     }
 
     private fun setupViews() {
         recyclerViewRV?.adapter = adapter
+        searchBTN.setOnClickListener {
+            onSearchSubmit()
+        }
     }
 
-    private fun showMessage(message: String) {
-        Toast.makeText(getViewContext(), message, Toast.LENGTH_LONG).show()
+    private fun onSearchSubmit() {
+        val querySearch = searchEDT.text.toString()
+        if (querySearch.isNotEmpty()) {
+            presenter.getSearchList(querySearch)
+        }
+    }
+
+    override fun displayFailure(error: Int) {
+        when (error) {
+            4 -> Toast.makeText(this, getString(R.string.erro4), Toast.LENGTH_LONG).show()
+            5 -> Toast.makeText(this, getString(R.string.erro5), Toast.LENGTH_LONG).show()
+            else -> Toast.makeText(this, getString(R.string.erro0), Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun getViewContext(): Context? {
@@ -103,9 +82,4 @@ class SearchActivity : AppCompatActivity(), Search.View, MovieAdapter.Listener {
         startActivity(intent, options.toBundle())
         adapter?.notifyDataSetChanged()
     }
-//
-//    companion object {
-//        const val SEARCH_ARG = "search_arg"
-//    }
-
 }

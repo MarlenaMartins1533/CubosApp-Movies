@@ -24,18 +24,8 @@
                 android:layout_gravity="end"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/searchEDT"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/search_hint"
-                    android:inputType="textAutoComplete"
-                    android:visibility="gone"
-                    tools:ignore="LabelFor"
-                    android:importantForAutofill="no" />
-
                 <ImageButton
-                    android:id="@+id/searchBTN"
+                    android:id="@+id/searchMainBTN"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
